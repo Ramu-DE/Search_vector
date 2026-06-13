@@ -1,0 +1,1636 @@
+Build Production Ready AI-powered
+Search Application
+Srinivas Margasahayam
+
+Prashant Agrawal
+
+Leader, OpenSearch Specialist Solution Architects
+AWS
+
+Sr. OpenSearch Specialist Solution Architect
+
+© 2026, Amazon Web
+© 2026,
+Services,
+Amazon
+Inc. or
+Web
+its affiliates.
+Services, Inc.
+All rights
+or its reserved.
+affiliates. All rights reserved. Amazon Confidential and Trademark.
+
+AWS
+
+What we’ll
+cover today
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+•
+
+Quick Intro on OpenSearch
+
+•
+
+Search and Vector Concepts
+
+•
+
+Vectors 101 – Notion of Vectors in Search
+
+•
+
+Semantic Search – what is KNN?
+
+•
+
+How does AI Powered Search work?
+
+•
+
+OpenSearch Serverless – Vector Database
+
+© 2026, Amazon Web Services, Inc. or its affiliates. All rights reserved. Amazon Confidential and Trademark.
+
+OpenSearch is a community-driven,
+open-source search, analytics, and vector
+database platform with integrated tools
+for observability, security, visualization,
+and AI-powered applications
+
+Roadmap:
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+OpenSearch
+by the
+numbers
+
+1.4B+
+Project downloads
+
+1M+
+Monthly page views
+For opensearch.org
+
+100+
+Solution providers
+
+In the top
+
+3K+
+
+400+
+
+20
+
+Active contributors
+
+Active organizations
+
+Of LF projects by
+contributor activity
+
+130+
+GitHub repositories
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+4K+
+Slack workspace
+members
+
+7K+
+User forum members
+
+Operational Simplicity
+
+Amazon
+OpenSearch
+Service
+Simplify AI-powered search, observability, and
+vector database operations with a secure, costeffective managed service
+
+Fully managed OpenSearch in the AWS Cloud.
+Serverless and managed clusters. API-driven
+deployments, upgrades, and patches
+
+Performance
+6x performance gains from OpenSearch 1.3 to current
+version. Single-digit ms latencies for lexical and vector
+queries
+
+Cost efficiency
+Storage tiering for voluminous log data, specialized
+instances, tune cluster sizes or autoscaled to match
+request traffic
+
+Integrations
+Quickly and easily connect all of your data for faster,
+better insights
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Amazon OpenSearch Service features
+D E P L O Y FA S T, AT S C A L E , W I T H R E M A R K A B L E VA L U E
+
+Automated
+
+Cost-optimized
+
+Resilient
+
+Secure
+
+Integrated
+
+API-driven deployment,
+and reconfiguration
+
+Optimize infrastructure,
+optimize cost
+
+Fine-grained access
+control
+
+Integrated user interface
+
+Service-managed
+upgrades and patches
+
+Reserved instances Up to
+52% discount
+
+One-click, multi-zone
+deployments, up to
+99.99% SLA
+
+Serverless Autoscale
+
+Tiered storage,
+specialized instances
+
+Automatic hourly
+snapshots, 2-week
+retention
+
+Service snapshots
+included
+
+Serverless enhanced
+resilience with S3
+
+Cross-zone transfer
+included
+
+Specialized instance
+types using S3 as a
+backing store
+
+24x7 monitoring, selfhealing
+Cross-cluster search
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Encryption at rest and in
+flight, customermanaged keys
+
+One-click integration
+with DynamoDB and
+Document DB
+
+Audit logging
+
+Zero ETL access to logs in
+S3 and CloudWatch Logs
+
+SAML/Cognito/IAM
+integration
+
+Supports OpenTelemetry
+and Jaeger
+
+F R O M K E Y W O R D S T O U N D E R S TA N D I N G
+
+Search and Vector Concepts
+
+Search is all about retrieving relevant information in response to a user goal
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+The Evolution of Search
+F R O M K E Y W O R D S T O U N D E R S TA N D I N G
+
+Keyword
+
+Semantic
+
+Hybrid
+
+Agentic
+
+Search is all about retrieving relevant information in response to a user goal
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Lexical Search
+• Search engines match terms to
+
+objects in a catalog
+• Match free text or structured data
+• Relevance determines sort order
+• Facets enable users to drill in to the
+
+search results to narrow by attribute
+value
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Vectors 101
+
+Magnitude
+
+“I am attending a great webinar about vector
+search “
+===
+
+[0.743, 0.720, -0.325, 0.195, 0.835, -0.945]
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Direction
+
+Notion of vectors in search
+A vector is a list of values describing some attributes of an item.
+v1 = [5, 4, 854, $1.1M]
+
+v3 = [6, 4, 530, $2.1M]
+1. How many bedrooms?
+2. How many bathrooms?
+3. Size of the house in sqmeters?
+4. Price of the house?
+
+v2 = [4, 3, 335, $530K]
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+v4 = [6, 4, 500, $2.5M]
+
+What is a vector database?
+STORE AND RETRIEVE VECTOR EMBEDDINGS
+
+•
+
+A vector datastore or database enables you to store and query high dimensional vectors at scale, with
+efficient nearest neighbor query algorithms and appropriate indexes to improve data retrieval
+
+•
+
+Enables updating and deleting vector embeddings as information changes e.g. product description
+updates
+
+•
+
+Vector databases offer ability to filter information based on similarity and metadata e.g. embeddings of
+product description field, numeric fields for product price
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Data as Vectors
+
+Image
+
+Machine Learning Model
+(Embedding)
+
+0.35 0.1 0 0.9 001.0 00 0001.0 0 0…
+0.35 0.1 0 0.8 001.0 00 0001.0 0 0…
+
+Documents
+
+0.15 0.1 0 0.7 001.0 00 0001.0 0 0…
+
+Audio
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+14
+
+Content (Vector) Similarity
+Your Favorite Song
+
+0., 0.5
+
+e.g. cosine distance
+1−(A⋅B)/(||A||⋅||B||)
+
+0.8, 0.2
+
+Similar songs
+(you might like)
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+k-Nearest-Neighbors: Find the “Top K” most similar…
+Approximated k-NN
+
+Exact (Brute-force) k-NN
+
+Hierarchical Navigable Small Worlds (HNSW)
+
+query vector:
+
+0.1, 0.2, 0.6 …. 0.3,0.7
+
+(e.g. your favorite song)
+Calculate distance and rank
+
+layer 2
+entry point
+query vector
+
+layer 1
+
+Song
+vector
+corpus
+
+query vector
+
+layer 0
+
+query vector
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Rich configurations, expert-driven process
+Select Index Parameters
+
+Build and Evaluate Index
+
+Adjust Parameters and Repeat
+
+1
+Search latency
+
+Algorithms:
+HNSW, ef_construction, m…
+
+layer 2
+
+Quantization:
+
+2
+
+Scalar, Binary,
+Product
+
+layer
+1
+
+Engine Settings:
+
+layer 0
+
+Disk-optimized,
+In-memory,
+Infrequent Queries
+
+3 Recall
+Exact (Brute-force) k-NN
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Memory
+Footprint
+
+What do I do with vectors?
+Vector
+embedding
+space
+
+Raw
+data
+
+Dev-ready and
+operationalized
+
+Consumable
+
+Retrieve content most similar to some
+content: question context, image, music
+clip . . .
+Image
+
+Dense vector encodings
+
+Machine learning model
+(embedding)
+
+0.35 0.1 0 0.9 001.0 00 0001.0 0 0…
+0.35 0.1 0 0.8 001.0 00 0001.0 0 0…
+
+Documents
+
+Audio
+
+0.15 0.1 0 0.7 001.0 00 0001.0 0 0…
+
+Sparse vector encodings
+(automatic metadata
+extraction)
+Content classification
+Salient terms and topics . . .
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+OpenSearch
+vector engine
+
+Retrieve most relevant
+content by key terms
+(metadata) . . .
+
+Build
+ML-powered search
+and analytics
+applications
+
+How Does AI Powered Search Work?
+Get images
+
+5
+
+Amazon S3
+
+Web-page
+1
+0.712229 0.049204 0.914865 0.930943 0.224451 0.913176 0.578052 0.364511
+
+2
+3
+
+vector
+
+Vector search
+
+4
+S3 locations
+
+Amazon Bedrock
+0.712229 0.049204 0.914865 0.930943 0.224451 0.913176 0.578052 0.364511
+
+0.188947 0.853614 0.631987 0.343558 0.377756
+0.973499 0.715575
+
+Amazon OpenSearch
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+0.19276 0.788824 0.214291
+
+0.92058 0.362141 0.038279 0.718954 0.049026 0.939275
+
+{ "color": "blue",
+"department": "Jersey",
+"Graphical appearance": "solid",
+"Product group": "accesories",
+"Product type": "gloves",
+"Section": "Men H&M sport"}
+
+Tiered vector storage
+C O S T R E D U C T I O N S AT M A S S I V E S C A L E
+
+Exact KNN
+
+MOST ACCURATE & EXPENSIVE
+
+In-memory
+
+Disk mode
+
+S3 vectors
+
+LOWER COST & HIGH PERFORMANCE
+
+CHEAPER STORAGE, STILL PERFORMANT
+
+CHEAPEST, MASSIVE SCALE STORAGE
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Finding the Optimal trade-offs
+
+Cost
+$
+
+Minimized cost
+$$
+
+Engine: disk-optimized
+Compression: 32X binary quantization
+Algorithm: HNSW, m=16, ef_construction=300, oversample=5
+
+$$$
+
+Speed
+(Latency)
+
+Uniquely Optimal for your
+application
+Engine: in-memory
+Compression: 4X Scalar
+Algorithm: HNSW, m=32, ef_construction=128
+
+Default
+
+Search Quality (Recall)
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Maximized
+search quality
+Engine: in-memory
+Compression: None
+Algorithm: HNSW, m=16, ef_construction=256
+
+Easy to administer
+No sizing, scaling, and tuning of clusters, and no shard
+and index lifecycle management
+
+Amazon
+OpenSearch
+Serverless
+
+Fast
+Automatically scale resources to maintain consistently
+fast data ingestion rates and query response times
+
+Ecosystem
+Get started in seconds using the same OpenSearch
+clients, pipelines, and APIs
+
+Cost-effective
+Pay only for the resources consumed
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+OpenSearch Serverless Innovation
+N E W C A PA B I L I T I E S
+•
+•
+•
+•
+
+Indexing
+
+Search
+
+100TB TIME-SERIES COLLECTIONS
+R E G I O N E X PA N S I O N F R O M 1 5 T O 2 2 R E G I O N S
+D ATA P L A N E A U D I T L O G G I N G
+SNAPSHOT RESTORE
+Active
+
+Active
+
+Index
+
+Replica
+
+Replica
+
+Index
+
+Amazon S3
+
+OpenSearch Serverless Modular Architecture
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Build Production Ready AI-powered Search
+Application
+Prashant Agrawal
+(He/Him)
+Principal Solutions Architect
+
+AWS
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+The Evolution of Search
+Surface
+
+Twilight
+
+Midnight
+
+Abyss
+
+Keyword
+
+Semantic
+
+Hybrid
+
+Agentic
+
+BM25 / TF-IDF
+
+ML Vectors
+
+Best of Both
+
+AI Agents + LLMs
+
+Exact term matching.
+Fast and interpretable.
+Cannot understand
+meaning or synonyms.
+
+Encodes meaning into
+vectors. Understands
+synonyms and context.
+Higher compute cost.
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Combines keyword and
+semantic in parallel.
+Score normalization.
+State-of-the-art today.
+
+Agents plan and execute
+searches autonomously.
+Natural language input.
+The future of search.
+
+Semantic Search — Two Approaches
+Sparse Encoding
+
+Dense Encoding
+
+•
+
+Expands documents with weighted synonyms
+
+•
+
+Uses existing inverted index (Lucene-native)
+
+•
+
+Fixed-length continuous vectors (384-768 dim)
+
+•
+
+30,522 dims (BERT vocab) — only ~1% non-zero
+per doc
+
+•
+
+Stored in vector index (HNSW, IVF, etc.)
+
+•
+
+Deep semantic relationships in vector space
+
+•
+
+105,879 dims for multilingual variant
+
+•
+
+k-NN search at query time
+
+•
+
+As efficient as BM25 at query time
+
+•
+
+BERT, Cohere, OpenAI, Amazon Titan, Bedrock
+
+•
+
+Pre-trained: opensearch-neural-sparse-v2
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+What do I do with vectors?
+Vector
+embedding
+space
+
+Raw
+data
+
+Dev-ready and
+operationalized
+
+Consumable
+
+Retrieve content most similar to some
+content: question context, image, music
+clip . . .
+Image
+
+Dense vector encodings
+
+Machine learning model
+(embedding)
+
+0.35 0.1 0 0.9 001.0 00 0001.0 0 0…
+0.35 0.1 0 0.8 001.0 00 0001.0 0 0…
+
+Documents
+
+Audio
+
+0.15 0.1 0 0.7 001.0 00 0001.0 0 0…
+
+Sparse vector encodings
+(automatic metadata
+extraction)
+Content classification
+Salient terms and topics . . .
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+OpenSearch
+vector engine
+
+Retrieve most relevant
+content by key terms
+(metadata) . . .
+
+Build
+ML-powered search
+and analytics
+applications
+
+Data as Vectors
+
+Image
+
+Machine Learning Model
+(Embedding)
+
+0.35 0.1 0 0.9 001.0 00 0001.0 0 0…
+0.35 0.1 0 0.8 001.0 00 0001.0 0 0…
+
+Documents
+
+0.15 0.1 0 0.7 001.0 00 0001.0 0 0…
+
+Audio
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Amazon Music : Recommendations
+
+If you loved this song
+
+High chance you would like these 5 songs:
+…
+…
+…
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Scoring semantic search
+
+X
+3X
+
+X
+2X
+
+Euclidean or Straight line
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Cosine = Angle between vectors
+
+Dense Encoding — Full Power of Embeddings
+
+Vector Space
+
+AI-Ready
+
+Optimized
+
+Text converted to fixed-length
+vectors.
+Similarity via cosine, dot product,
+L2.
+Captures deep semantics and
+nuance.
+
+Powers RAG pipelines with LLMs.
+Cross-lingual search capability.
+Works with BERT, Cohere, Titan.
+
+HNSW, IVF, IVFPQ engines.
+FP16, INT8, binary quantization.
+50-97% memory reduction.
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Sparse similarity
+Document 2: ”An apple a day keeps doctor away”
+
+Document 1: “Apple Products are expensive”
+
+Query: “apple headphones”
+
+𝑠𝑐𝑜𝑟𝑒 𝐷1, 𝑄 = 7.4521604
+
+>
+
+𝑠𝑐𝑜𝑟𝑒 𝐷2, 𝑄 = 5.5605326
+
+Scoring:
+𝑠𝑐𝑜𝑟𝑒 𝐷, 𝑄 = ෍ 𝑤𝑗 . 𝑤𝑖
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Sparse Encoding — Fast, Cheap, and Smart
+
+10x
+Smaller index than
+dense encoding
+
+0
+RAM increase at
+search time
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+•
+
+Leverages existing Lucene inverted index infrastructure
+
+•
+
+Creates weighted synonyms: "car" → automobile: 0.8, vehicle: 0.6
+
+•
+
+Graceful fallback to keyword matching — never worse than BM25
+
+•
+
+Fully interpretable via the explain API
+
+•
+
+Document-only mode eliminates online inference at query time
+
+•
+
+Two-phase search acceleration (OpenSearch 2.15+)
+
+Why One Method May Not Always Work
+When Keyword Search Fails
+•
+
+"Best laptop for students" — no exact match for
+"best"
+
+•
+
+"Heart attack" vs "myocardial infarction"
+
+•
+
+Conceptual: "things to do when bored"
+
+•
+
+"Python" — the snake or the language?
+
+When Semantic Search Fails
+•
+
+Product SKUs, error codes: ERR-4032
+
+•
+
+Domain-specific jargon without fine-tuning
+
+•
+
+Precision-critical legal/compliance queries
+
+•
+
+Numerical and date filtering needs
+
+The Takeaway
+No single method covers all scenarios. The best search systems combine approaches intelligently. Users
+just want the right answer.
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Hybrid Search — Best of Both Worlds
+Keyword Search
+(BM25)
+Score
+Normalization
+& Combination
+
+Unified
+Ranked Results
+
+Semantic Search
+(Sparse / Dense)
+
+Arithmetic Mean
+
+Weighted Sum
+
+Harmonic Mean
+
+Equal weight to both
+
+Tunable: 0.6 semantic + 0.4 keyword
+
+Penalizes large discrepancies
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Agentic Search — When Search Starts Thinking
+Available in OpenSearch 3.3+ | Natural language queries | Transparent reasoning
+
+Neural Search
+
+Flow Search
+
+Agents & Tools
+
+Agentic Memory
+
+Embedding-powered
+ingestion and retrieval
+
+Streamlined query
+planning pipelines
+
+Orchestrated reasoning
+and execution
+
+Persistent context and
+conversation history
+
+Built on OpenSearch ML Commons framework — agents, tools, models, and memory. Enabled through a simple 'agentic' query
+clause.
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+KNN Distance Metrics
+Euclidean (L2)
+Useful for counts / measurements
+Recommendation Systems
+
+Cosine Similarity
+Useful for semantic search and document
+classification
+
+Dot Product
+Useful for collaborative filtering
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Architecture deep-dive
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+AI-powered Search - Architecture
+AWS Cloud
+Region
+Model Server
+Image
+
+Documents
+
+2
+
+Ingestion
+
+1
+
+1
+
+Query
+
+3.2
+
+3.3
+
+Amazon EC2
+
+2
+
+Generate embeddings and ingest
+into OpenSearch Serverless index
+
+3
+
+Send vectorized query text for
+similarity search using
+k-NN plug-in
+
+Amazon OpenSearch Serverless
+
+GitHub Repo
+
+Query
+
+3.1
+
+4
+
+Return Top Results to
+User
+
+4
+
+User
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Use Amazon EC2 to crawl GitHub
+repo / other document sources
+and load Embedding model over
+there
+
+Relevant results are returned to
+user.
+
+AI-powered Search - Ingestion flow
+Indexing Flow
+Source Data
+{“title”: “a film for friends”, “year” : 2011, “plot” : “…”}
+{“title”: “Sagrada Familia”, “year” : 2009, “plot” : “…”}
+
+Embedding Models
+
+Amazon Titan Embeddings (dim: 1536)
+msmarco-distilbert-base-tas-b (dim: 768)
+all-MiniLM-L6-v2 (dim: 384)
+...
+...
+
+OpenSearch Clients
+
+python
+java
+go
+...
+...
+
+{“title_v”: [0.0056, 0.0065, …]}
+{“title_v”: [0.0067, 0.0076, …]}
+
+{“title”: “a film for friends”, “year” : 2011, “plot” : “…”, “title_v”:
+[0.0056, 0.0065, …]}
+{“title”: “Sagrada Familia”, “year” : 2009, “plot” : “…” , “title_v”:
+[0.0067, 0.0076, …]}
+
+OpenSearch
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+OpenSearch Project
+Amazon OpenSearch Service
+Amazon OpenSearch Serverless
+
+AI-powered Search - Ingestion (code snippet)
+Define Model and Generate
+
+Setup OpenSearch Client
+
+Load data to OpenSearch
+
+embedding
+# Load model (creates vector with 1536 dimensions)
+bedrock_runtime.invoke_model(
+modelId='amazon.titan-embed-text-v1',
+contentType='application/json',
+accept='application/json',
+body=json.dumps({
+'inputText': text
+})
+
+# Retrieve Embedding
+response_body = json.loads(response['body'].read())
+embeddings=response_body['embedding']
+
+# Prepare Doc
+vector_document = {
+"title": title,
+”plot": plot,
+"v_title": embeddings,
+…
+}
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+# Setup Credentials
+credentials = boto3.Session().get_credentials()
+awsauth = AWS4Auth(credentials.access_key, credentials.secret_key,
+region, service,
+session_token=credentials.token)
+
+# Create an OpenSearch client
+client = OpenSearch(
+hosts = [{'host': host, 'port': 443}],
+http_auth = awsauth,
+timeout = 300,
+use_ssl = True,
+verify_certs = True,
+connection_class = RequestsHttpConnection
+)
+# Index Documents
+client.indices.create(
+index=index_name,
+body=index_body
+)
+
+# create a new index
+index_body = {
+"settings": {
+"index.knn": true
+},
+"mappings": {
+"properties": {
+"v_title": {
+"type": "knn_vector",
+"dimension": 1536
+},
+"title": { "type": "text” },
+”plot": { "type": "text” },
+"repository": { "type": "text" }
+}
+}
+}
+
+# Bulk Index to OpenSearch Index
+client.bulk(body=actions)
+
+AI-powered Search - Search flow
+Searching Flow
+
+Movie to watch with friends
+
+User Query
+Uplifting underdog story
+
+Embedding Models
+
+Bedrock Embeddings (dim: 4096)
+msmarco-distilbert-base-tas-b (dim: 768)
+all-MiniLM-L6-v2 (dim: 384)
+...
+...
+
+OpenSearch Clients
+
+python
+java
+go
+...
+...
+
+query_embeddings: [0.0048, 0.0089]
+
+"size": 10,
+"fields": ["title"],
+"knn_query": [vector: query_embedding],
+"pre_filter” : [rating > 7],
+”post_filter” : [_score > 0.8]
+
+OpenSearch
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+OpenSearch Project
+Amazon OpenSearch Service
+Amazon OpenSearch Serverless
+
+AI-powered Search - Search (code snippet)
+Use defined Model to Generate
+
+Prepare OpenSearch Query
+
+Query OpenSearch
+
+embedding for query
+# Load model (creates vector with 1536 dimensions)
+bedrock_runtime.invoke_model(
+modelId='amazon.titan-embed-text-v1',
+contentType='application/json',
+accept='application/json',
+body=json.dumps({
+'inputText': text
+})
+
+# Retrieve Embedding
+response_body = json.loads(response['body'].read())
+query_embedding=response_body['embedding']
+
+# Prepare Query
+"size": 3,
+"fields": ["title"],
+"knn_query": [vector: query_embedding],
+"pre_filter” : [rating > 7],
+”post_filter” : [_score > 0.8]
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+# Prepare OpenSearch Query
+query_knn = {
+"size": 3,
+"_source": { "includes": [ "title" ..},
+"query": {
+"bool": {
+"should": [
+{
+"knn": {
+"v_title": {
+"vector": query_embedding,
+"k": 5
+}
+}
+}
+],
+"filter": [
+{
+"range": {
+"rating": {
+"gte": 8
+}
+}
+}
+]
+}
+}
+
+response = client.search(
+body = query_knn,
+index = index
+)
+# Extract relevant information from the search result
+hits_knn = response_knn['hits']['hits’]
+doc_count_knn = response_knn['hits']['total']['value']
+
+Let’s Build
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Demo
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Workshop Felicitators
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Workshop Modules
+Introduction
+
+Build an AI-powered semantic
+search application using Amazon
+OpenSearch Serverless and
+Amazon Bedrock
+
+Load Data
+
+Setup
+
+Transform & Index: Run
+movies_loader.py to generate
+Bedrock Titan embeddings and
+bulk-index movie data into
+OpenSearch Serverless
+Update Security Group rules
+(ports 22 + 8080), connect to
+EC2 via Instance Connect, verify
+environment variables
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Search &
+Visualize Data
+
+Run vector_search_bedrock.py
+for interactive k-NN queries, then
+launch Streamlit app to compare
+keyword vs semantic
+
+Before you start
+You have access to an AWS account with
+everything needed to complete this workshop.
+
+Accessing the workshop
+Sign in using your preferred method
+
+1.
+
+https://tinyurl.com/ai-search-513
+
+Enter the One-time email passcode
+The AWS account is only available for the
+duration of this workshop. You will lose access
+to the account once the workshop is complete.
+
+2.
+
+xxxxxxxxx
+
+3.
+
+Review terms and join event
+
+4.
+
+Click “Get Started” to begin the workshop
+
+The workshop is deployed to a specific AWS
+Region. Make sure that you are working in this
+Region as other Regions are blocked.
+
+Review the terms and conditions of the event.
+Do not upload any personal or confidential
+information to the account.
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+5.
+
+Access AWS Accounts
+Access the AWS Management Console
+
+Step 1: Sign in using your preferred method
+
+https://tinyurl.com/ai-search-513
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Step 2: Enter the One-time email passcode
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Step 3: Review terms
+and join event
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Step 4: Get started with the workshop
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Step 5: Access AWS Account
+
+Access the AWS Management Console
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Workshop Checkpoint - 1
+By now you should have:
+Introduction
+& Setup
+
+✅ Security group updated (ports 22 + 8080)
+✅ Connected to EC2 via Instance Connect as ec2-user
+
+Load Data
+
+Search & Visualize
+Data
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+✅ Run: echo $AOSS_VECTORSEARCH_ENDPOINT → shows
+your collection URL
+✅ Run: echo $AOSS_VECTORSEARCH_REGION → shows uswest-2
+
+Workshop Checkpoint - 2
+By now you should have:
+Introduction
+& Setup
+
+✅ cd /home/ec2-user/vector-engine-demos/indexer
+✅ python3 movies_loader.py --background (NO sudo!)
+Load Data
+
+Search & Visualize
+Data
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+✅ tail -f movies_loader.log → shows "bulk indexing done"
+
+Workshop Checkpoint - 3
+By now you should have:
+Introduction
+& Setup
+
+✅ python3 vector_search_bedrock.py → type query → see
+results
+Load Data
+
+✅ streamlit run 0_Home.py → running on port 8080
+✅ http://<your-EC2-IP>:8080 → Streamlit app loads
+✅ Semantic Search page → try a query!
+
+Search &
+Visualize Data
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Best practices for cost optimization,
+performance tuning, and monitoring
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+The Search System Design Triangle
+COST
+
+$
+
+Compute + Storage + RAM.
+OCU hours (Serverless).
+Scales with index size
+and query volume.
+
+Pick
+Two
+
+Are top-K results relevant?
+NDCG, MRR metrics.
+Driven by model quality
+and search pipeline.
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+◎
+
+⚡
+
+RECALL
+
+LATENCY
+
+Query response time.
+P50/P95/P99 percentiles.
+Driven by algorithm choice
+and index config.
+
+Cost Optimization — Strategies That Work
+50–97%
+memory savings
+with quantization
+
+Q uantiz atio n: FP32 → FP16 → IN T8 → Binary
+Binary + rescoring = 97% memory reduction, <2% recall loss
+D isk- based vecto r search (O p enS earch 2.17+ )
+Vectors on SSD, not RAM — up to 32x memory reduction
+S parse enco d ing (d o c - o nly m o d e)
+Zero RAM overhead at query time, uses Lucene inverted index
+R ig ht- siz e d im ensio ns: 768 → 384
+50% storage, ~1% recall loss
+
+10x
+smaller index with
+sparse encoding
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Tiered sto rag e: H o t → Warm → C o ld (S 3)
+HNSW in-memory → Disk-based → S3 vectors
+S erverless O C U auto - scaling
+Pay only for actual search/indexing compute
+
+Performance Tuning —Latency Deep Dive
+HNSW Parameters
+
+Query Optimization
+
+ef_co nstructio n
+Index build quality. Higher = better graph, slower build.
+Only affects indexing time, not query performance.
+
+Pre- filtering vs Po st- filtering
+Pre-filter reduces candidate set → much faster search.
+Use when filter selectivity is high.
+
+M (g rap h co nnectivity)
+Higher M = better recall but more memory + slower indexing.
+Default 16 is good for most cases. Try 32 for high-recall.
+
+Ap p roxim ate vs Exact
+ANN (HNSW) = milliseconds latency
+Exact k-NN = seconds latency
+
+ef_search (query- tim e tuning )
+Start at 100, increase until recall plateaus.
+This is the kno b m o st p eo p le und ertune!
+
+Request cache
+Cache repeated semantic queries for instant response.
+Fo rce- m erg e to 1 seg m ent
+20–40% search latency reduction after bulk indexing.
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Recall Optimization —Getting Better Results
++10–15%
+
+H yb rid search: BM25 + kN N in parallel
+Score normalization (min_max vs L2) affects ranking quality
+Reranking : C ro ss- enco d er as seco nd pass
+Cohere, BGE — improves precision without changing index
+
+recall improvement
+with domain fine-tuning
+
+Hybrid
+BM25 + kNN consistently
+beats either alone
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+C hunking strateg y
+10–20% overlap, 256–512 tokens optimal
+Too large = diluted semantics, too small = lost context
+Em b ed d ing m o d el selectio n
+Domain fine-tuning on 5K examples > larger generic model
+Multi- vecto r p er d o cum ent
+Title + Body + Summary embeddings separately
+Metad ata filtering : N arro w first, then sem antic
+
+Monitoring —What to Watch
+Quality & Relevance
+
+Operational
+
+Recall@K
+Are your top-K results actually relevant?
+Needs labeled data or click-through signals
+
+Latency P50 / P95 / P99
+Track percentiles, not averages —tail matters
+P99 tells you about worst user experience
+
+NDCG / MRR
+Ranking quality —position matters, not just presence
+
+Index size & segment count
+Directly correlates with query latency
+Force-merge after bulk indexing
+
+A/B testing
+Compare approaches with real user traffic
+Click-through rate is the ultimate signal
+Cost per relevant result
+Combines all three triangle dimensions
+Best single business metric
+
+OCU utilization (Serverless)
+Over-provisioned or throttling?
+Embedding latency
+Bedrock/model inference —often the real bottleneck
+Query volume patterns
+Burst traffic → pre-warm indexes
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Putting It Together —Decision Framework
+Step 1: Define your latency SLA (P99 < 200ms? < 500ms? < 2s?)
+Step 2: Set minimum acceptable recall (Recall@10 > 0.85? > 0.95?)
+Step 3: Cost becomes the optimization variable
+E-commerce
+
+Internal Knowledge Base
+
+Low latency +High recall → Invest in infra
+In-memory HNSW, pre-filtering, aggressive caching
+
+Moderate latency OK → Optimize cost
+Disk-based vectors, sparse encoding, OCU auto-scale
+
+Legal / Compliance
+
+Chatbot / RAG
+
+Maximum recall required → Accept higher cost +latency
+Exact k-NN, hybrid search, reranking pipeline
+
+Balance all three → Hybrid search +caching
+Domain fine-tuned model, quantized vectors, tiered storage
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Any Questions?
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Thank you!
+Prashant Agrawal
+prashagr@amazon.com
+
+© 2023, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
