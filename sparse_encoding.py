@@ -169,12 +169,16 @@ class SparseEncoder:
         terms2 = set(dict2.keys())
         overlap = terms1 & terms2
 
+        # Calculate overlap ratio (avoid division by zero)
+        max_terms = max(len(terms1), len(terms2))
+        overlap_ratio = len(overlap) / max_terms if max_terms > 0 else 0.0
+
         return {
             'similarity': float(similarity),
             'text1_terms': len(terms1),
             'text2_terms': len(terms2),
             'overlap_terms': len(overlap),
-            'overlap_ratio': len(overlap) / max(len(terms1), len(terms2)),
+            'overlap_ratio': overlap_ratio,
             'overlapping_terms': {
                 term: {
                     'weight1': dict1.get(term, 0),

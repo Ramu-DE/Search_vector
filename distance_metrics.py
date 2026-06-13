@@ -282,11 +282,14 @@ class KNNSearchEngine:
             vectors: Array of shape (n_samples, n_features)
             labels: List of labels for each vector
         """
-        self.vectors = np.array(vectors)
-        self.labels = labels
-
-        if len(self.vectors) != len(self.labels):
+        # Validate before assignment to avoid inconsistent state
+        vectors_array = np.array(vectors)
+        if len(vectors_array) != len(labels):
             raise ValueError("Number of vectors must match number of labels")
+
+        # Only assign after validation passes
+        self.vectors = vectors_array
+        self.labels = labels
 
     def search(self, query: np.ndarray, k: int = 5) -> List[Tuple[Any, float]]:
         """

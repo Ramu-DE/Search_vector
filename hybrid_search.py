@@ -244,13 +244,13 @@ class HybridSearchEngine:
         # 3. Dense semantic search (simulated - in practice use real embeddings)
         print("  Building dense semantic index...")
         # For demo, use TF-IDF as proxy (in production, use actual embeddings)
-        dense_vectorizer = TfidfVectorizer(
+        self.dense_vectorizer = TfidfVectorizer(
             max_features=min(384, max_features),  # Simulate embedding dimension
             ngram_range=(1, 1),
             stop_words='english',
             norm='l2'
         )
-        self.dense_vectors = dense_vectorizer.fit_transform(texts).toarray()
+        self.dense_vectors = self.dense_vectorizer.fit_transform(texts).toarray()
 
         self.is_fitted = True
         print(f"✓ Hybrid search fitted")
@@ -366,18 +366,8 @@ class HybridSearchEngine:
     def _dense_search(self, query: str) -> np.ndarray:
         """Dense semantic search (simulated)"""
         # In production, encode query with actual embedding model
-        # For demo, use TF-IDF as proxy
-        query_vec = TfidfVectorizer(
-            vocabulary=self.sparse_vectorizer.vocabulary_,
-            norm='l2'
-        ).fit_transform([query]).toarray()
-
-        # Pad/trim to match dense dimension
-        target_dim = self.dense_vectors.shape[1]
-        if query_vec.shape[1] < target_dim:
-            query_vec = np.pad(query_vec, ((0, 0), (0, target_dim - query_vec.shape[1])))
-        elif query_vec.shape[1] > target_dim:
-            query_vec = query_vec[:, :target_dim]
+        # Use the same vectorizer that created dense_vectors to ensure vocabulary alignment
+        query_vec = self.dense_vectorizer.transform([query]).toarray()
 
         scores = cosine_similarity(query_vec, self.dense_vectors)[0]
         return scores

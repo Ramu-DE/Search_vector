@@ -162,6 +162,11 @@ def run_compare(text1, text2, max_features):
     print(f"Text 2 terms: {comparison['text2_terms']}")
     print(f"Overlapping terms: {comparison['overlap_terms']} ({comparison['overlap_ratio']:.1%})")
 
+    # Warn if both texts have no terms
+    if comparison['text1_terms'] == 0 and comparison['text2_terms'] == 0:
+        print("\n⚠️  Warning: Both texts produced no terms after encoding (stopwords or empty)")
+        print("   Similarity and overlap metrics may not be meaningful.")
+
     if comparison['overlapping_terms']:
         print(f"\nShared terms:")
         for term, weights in list(comparison['overlapping_terms'].items())[:10]:
