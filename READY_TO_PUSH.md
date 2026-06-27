@@ -53,7 +53,6 @@ visualizations/
 
 #### 4. Claude Attribution
 - ✅ CLAUDE_ATTRIBUTION.md - Full transparency document
-- ✅ Commit messages include: `Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>`
 - ✅ Clear separation of AI-generated (docs) vs human-created (code, visuals)
 
 #### 5. Complete Documentation
